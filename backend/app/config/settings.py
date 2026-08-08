@@ -1,3 +1,4 @@
+import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
 
@@ -17,7 +18,7 @@ class Settings(BaseSettings):
     OPENAI_MODEL: str = "gpt-4o-mini"
     
     # Database Settings
-    DATABASE_URL: str = "sqlite:///./interview_ai.db"
+    DATABASE_URL: str = "sqlite:////tmp/interview_ai.db" if os.environ.get("VERCEL") else "sqlite:///./interview_ai.db"
     
     # CORS
     BACKEND_CORS_ORIGINS: list[str] = [
