@@ -1,8 +1,18 @@
 import sys
 import os
 
-# Add backend directory to sys.path so 'app' module can be imported
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "backend")))
+# Add backend directory to sys.path for Vercel Serverless Function deployment
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+backend_dir = os.path.join(parent_dir, "backend")
 
-# pyrefly: ignore [missing-import]
-from app.main import app
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+try:
+    from app.main import app
+except Exception as err:
+    print(f"Error loading FastAPI app in Vercel Serverless Function: {err}")
+    raise err

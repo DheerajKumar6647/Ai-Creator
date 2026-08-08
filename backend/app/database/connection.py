@@ -2,7 +2,14 @@ from sqlmodel import SQLModel, create_engine, Session
 from app.config.settings import settings
 from app.utils.logger import logger
 
+import os
 db_url = settings.get_effective_db_url
+if db_url.startswith("sqlite:////tmp"):
+    try:
+        os.makedirs("/tmp", exist_ok=True)
+    except Exception:
+        pass
+
 connect_args = {"check_same_thread": False} if db_url.startswith("sqlite") else {}
 engine = create_engine(db_url, echo=False, connect_args=connect_args)
 
