@@ -1,18 +1,32 @@
 import sys
 import os
 
-# Add backend directory to sys.path for Vercel Serverless Function deployment
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-backend_dir = os.path.join(parent_dir, "backend")
+# Ensure backend directory is in sys.path regardless of Vercel serverless directory structure
+cwd = os.getcwd()
+file_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(file_dir)
 
-if backend_dir not in sys.path:
-    sys.path.insert(0, backend_dir)
-if parent_dir not in sys.path:
-    sys.path.insert(0, parent_dir)
+path_candidates = [
+    os.path.join(cwd, "backend"),
+    os.path.join(file_dir, "backend"),
+    os.path.join(parent_dir, "backend"),
+    cwd,
+    file_dir,
+    parent_dir
+]
+
+for p in path_candidates:
+    if os.path.exists(p) and p not in sys.path:
+        sys.path.insert(0, p)
 
 try:
     from app.main import app
+except ImportError:
+    try:
+        from backend.app.main import app
+    except Exception as err:
+        print(f"Error importing app from backend: {err}")
+        raise err
 except Exception as err:
-    print(f"Error loading FastAPI app in Vercel Serverless Function: {err}")
+    print(f"Error importing app: {err}")
     raise err
