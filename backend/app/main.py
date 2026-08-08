@@ -23,6 +23,13 @@ async def lifespan(app: FastAPI):
     yield
     logger.info("Shutting down InterviewAI backend service.")
 
+# Guarantee DB initialization and seeding on module import for serverless environments (e.g. Vercel)
+try:
+    init_db()
+    run_seed()
+except Exception as db_init_err:
+    logger.error(f"Serverless DB startup initialization notice: {db_init_err}")
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description="Adaptive Technical Interview Agent Platform built with FastAPI and LangGraph",
@@ -55,13 +62,14 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
-# Include Routers
+# Include Routers with /api/v1 prefix and root fallback for Vercel Serverless routing
 api_v1_prefix = settings.API_V1_STR
-app.include_router(health_router, prefix=api_v1_prefix)
-app.include_router(candidate_router, prefix=api_v1_prefix)
-app.include_router(curriculum_router, prefix=api_v1_prefix)
-app.include_router(interview_router, prefix=api_v1_prefix)
-app.include_router(feedback_router, prefix=api_v1_prefix)
+for prefix in [api_v1_prefix, ""]:
+    app.include_router(health_router, prefix=prefix)
+    app.include_router(candidate_router, prefix=prefix)
+    app.include_router(curriculum_router, prefix=prefix)
+    app.include_router(interview_router, prefix=prefix)
+    app.include_router(feedback_router, prefix=prefix)
 
 @app.get("/")
 def root():

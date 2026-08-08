@@ -20,6 +20,13 @@ class Settings(BaseSettings):
     # Database Settings
     DATABASE_URL: str = "sqlite:////tmp/interview_ai.db" if os.environ.get("VERCEL") else "sqlite:///./interview_ai.db"
     
+    @property
+    def get_effective_db_url(self) -> str:
+        url = self.DATABASE_URL
+        if url and url.startswith("postgres://"):
+            return url.replace("postgres://", "postgresql://", 1)
+        return url
+    
     # CORS
     BACKEND_CORS_ORIGINS: list[str] = [
         "http://localhost:3000",

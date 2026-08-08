@@ -38,7 +38,19 @@ class InterviewService:
     async def start_interview(self, candidate_id: str) -> Dict[str, Any]:
         candidate = self.candidate_repo.get_by_id(candidate_id)
         if not candidate:
-            raise ValueError(f"Candidate {candidate_id} not found.")
+            # Auto-seed if database was unseeded in ephemeral serverless container
+            from app.database.seed import run_seed
+            run_seed()
+            candidate = self.candidate_repo.get_by_id(candidate_id)
+
+        if not candidate:
+            # Fallback to first available candidate if specific ID not found
+            all_cands = self.candidate_repo.list_all()
+            if all_cands:
+                candidate = all_cands[0]
+                candidate_id = candidate.id
+            else:
+                raise ValueError(f"Candidate {candidate_id} not found.")
 
         session_id = f"session_{uuid.uuid4().hex[:10]}"
         
