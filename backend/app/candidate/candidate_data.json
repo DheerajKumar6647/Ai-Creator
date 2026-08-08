@@ -1,0 +1,71 @@
+[
+  {
+    "candidate_id": "cand_alex_chen",
+    "name": "Alex Chen",
+    "email": "alex.chen@example.com",
+    "target_role": "Senior RAG Engineer",
+    "experience_level": "Mid-Senior",
+    "years_of_experience": 4.0,
+    "primary_skills": ["Python", "RAG", "Embeddings", "FAISS"],
+    "resume_summary": "4+ years building production RAG pipelines, dense vector retrieval, and hybrid search.",
+    "completed_days": [1, 2, 6, 7, 8, 9],
+    "skipped_days": [3, 4, 5],
+    "attempts": 4,
+    "completion_percentage": 60.0,
+    "learning_signals": {
+      "average_score": 7.5,
+      "strong_topics": ["day1_tokenization", "day6_vector_embeddings", "day9_rag_pipelines"],
+      "weak_topics": ["day7_chunking", "day8_vector_databases"],
+      "likely_knowledge_gaps": ["Chunk overlap trade-offs", "HNSW vs IVF vector indices"],
+      "preferred_difficulty": 3,
+      "communication_skill": "Good",
+      "engineering_maturity": "Mid-Senior"
+    }
+  },
+  {
+    "candidate_id": "cand_maya_lin",
+    "name": "Maya Lin",
+    "email": "maya.lin@example.com",
+    "target_role": "Principal AI Architect",
+    "experience_level": "Staff / Principal",
+    "years_of_experience": 7.5,
+    "primary_skills": ["LangGraph", "Production Guardrails", "RAGAS", "Multi-Agent Systems"],
+    "resume_summary": "7+ years architecting enterprise multi-agent workflows, LLM evaluation, and safety guardrails.",
+    "completed_days": [1, 2, 6, 7, 8, 9, 13, 14, 21, 26],
+    "skipped_days": [],
+    "attempts": 8,
+    "completion_percentage": 100.0,
+    "learning_signals": {
+      "average_score": 9.1,
+      "strong_topics": ["day9_rag_pipelines", "day13_agent_basics", "day21_rag_evaluation", "day26_production_guardrails"],
+      "weak_topics": [],
+      "likely_knowledge_gaps": [],
+      "preferred_difficulty": 4,
+      "communication_skill": "Excellent",
+      "engineering_maturity": "Senior"
+    }
+  },
+  {
+    "candidate_id": "cand_jordan_taylor",
+    "name": "Jordan Taylor",
+    "email": "jordan.taylor@example.com",
+    "target_role": "Junior AI Developer",
+    "experience_level": "Junior",
+    "years_of_experience": 1.0,
+    "primary_skills": ["Python", "Prompt Engineering", "FastAPI"],
+    "resume_summary": "1 year building basic LLM API wrappers and prompt templates.",
+    "completed_days": [1, 2],
+    "skipped_days": [3, 4, 5, 6, 7],
+    "attempts": 1,
+    "completion_percentage": 20.0,
+    "learning_signals": {
+      "average_score": 5.8,
+      "strong_topics": ["day1_tokenization"],
+      "weak_topics": ["day2_structured_outputs", "day2_function_calling"],
+      "likely_knowledge_gaps": ["Pydantic validation handling", "JSON parsing errors"],
+      "preferred_difficulty": 1,
+      "communication_skill": "Developing",
+      "engineering_maturity": "Junior"
+    }
+  }
+]

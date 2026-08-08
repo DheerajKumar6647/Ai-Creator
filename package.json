@@ -1,0 +1,13 @@
+{
+  "name": "interview-ai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && py -m uvicorn app.main:app --reload --port 8000",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

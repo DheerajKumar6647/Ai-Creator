@@ -1,0 +1,224 @@
+{
+  "curriculum": [
+    {
+      "day_number": 1,
+      "title": "LLM Fundamentals & API Integration",
+      "description": "Understanding Transformer outputs, tokenization, prompt structures, and multi-provider API interaction.",
+      "tools": ["OpenAI API", "Google Gemini SDK", "Tiktoken"],
+      "difficulty": 1,
+      "prerequisites": [],
+      "topics": [
+        {
+          "topic_id": "day1_tokenization",
+          "name": "Tokenization & Context Windows",
+          "description": "Subword tokenization mechanisms, token estimation, and context boundary management.",
+          "learning_objectives": ["Explain tokenization mechanics", "Calculate token limits", "Prevent context overflow"],
+          "prerequisites": [],
+          "tools_used": ["Tiktoken"],
+          "difficulty": 1,
+          "related_topics": ["day1_api_calling"]
+        },
+        {
+          "topic_id": "day1_api_calling",
+          "name": "LLM API Calling & Parameter Tuning",
+          "description": "Temperature, top_p, top_k, max_tokens, and system prompt engineering.",
+          "learning_objectives": ["Configure LLM sampling parameters", "Handle API errors and rate limits"],
+          "prerequisites": ["day1_tokenization"],
+          "tools_used": ["OpenAI API", "Google Gemini SDK"],
+          "difficulty": 1,
+          "related_topics": ["day2_structured_outputs"]
+        }
+      ]
+    },
+    {
+      "day_number": 2,
+      "title": "Structured Outputs & Function Calling",
+      "description": "Enforcing deterministic JSON responses, Pydantic validation, and LLM tool invocation.",
+      "tools": ["Pydantic", "OpenAI Function Calling", "Instructor"],
+      "difficulty": 2,
+      "prerequisites": ["day1_api_calling"],
+      "topics": [
+        {
+          "topic_id": "day2_structured_outputs",
+          "name": "JSON Schema & Pydantic Validation",
+          "description": "Guaranteeing JSON structures, handling field constraints, and auto-retry parsing.",
+          "learning_objectives": ["Define Pydantic schema for LLM outputs", "Handle JSON parsing errors"],
+          "prerequisites": ["day1_api_calling"],
+          "tools_used": ["Pydantic", "Instructor"],
+          "difficulty": 2,
+          "related_topics": ["day2_function_calling"]
+        },
+        {
+          "topic_id": "day2_function_calling",
+          "name": "Function Calling & Tool Definitions",
+          "description": "Exposing native tools/functions to LLMs and parsing tool call requests.",
+          "learning_objectives": ["Define JSON function schemas", "Execute function calls returned by models"],
+          "prerequisites": ["day2_structured_outputs"],
+          "tools_used": ["OpenAI API"],
+          "difficulty": 2,
+          "related_topics": ["day13_agent_basics"]
+        }
+      ]
+    },
+    {
+      "day_number": 6,
+      "title": "Embeddings & Vector Representations",
+      "description": "Dense vector spaces, embedding model selection, and distance metrics.",
+      "tools": ["OpenAI Embeddings", "HuggingFace Sentence-Transformers", "Numpy"],
+      "difficulty": 2,
+      "prerequisites": ["day1_tokenization"],
+      "topics": [
+        {
+          "topic_id": "day6_vector_embeddings",
+          "name": "Dense Vector Embeddings",
+          "description": "Converting text into mathematical vectors, semantic similarity, and dimensionality.",
+          "learning_objectives": ["Explain how embedding models represent semantics", "Differentiate cosine similarity vs Euclidean distance"],
+          "prerequisites": ["day1_tokenization"],
+          "tools_used": ["OpenAI Embeddings", "Sentence-Transformers"],
+          "difficulty": 2,
+          "related_topics": ["day7_chunking"]
+        }
+      ]
+    },
+    {
+      "day_number": 7,
+      "title": "Document Processing & Chunking Strategies",
+      "description": "Fixed-size, recursive, and semantic document chunking techniques for RAG.",
+      "tools": ["LangChain TextSplitter", "LlamaIndex", "PyPDF"],
+      "difficulty": 2,
+      "prerequisites": ["day6_vector_embeddings"],
+      "topics": [
+        {
+          "topic_id": "day7_chunking",
+          "name": "Document Chunking Strategies",
+          "description": "Fixed size chunking, chunk overlap, markdown aware splitting, and semantic boundary detection.",
+          "learning_objectives": ["Select appropriate chunk size and overlap", "Evaluate impact of chunking on retrieval quality"],
+          "prerequisites": ["day6_vector_embeddings"],
+          "tools_used": ["LangChain TextSplitter"],
+          "difficulty": 2,
+          "related_topics": ["day8_vector_databases"]
+        }
+      ]
+    },
+    {
+      "day_number": 8,
+      "title": "Vector Databases & Indexing",
+      "description": "Storing vectors, HNSW, IVF, similarity search, and Pinecone/FAISS indexing.",
+      "tools": ["Pinecone", "FAISS", "ChromaDB", "Qdrant"],
+      "difficulty": 3,
+      "prerequisites": ["day6_vector_embeddings", "day7_chunking"],
+      "topics": [
+        {
+          "topic_id": "day8_vector_databases",
+          "name": "Vector Database Architecture & Indexing",
+          "description": "Vector indexing types (HNSW, Flat, IVF), metadata filtering, and retrieval latency tradeoffs.",
+          "learning_objectives": ["Compare FAISS vs Pinecone", "Explain HNSW graph indexing", "Implement metadata filtering"],
+          "prerequisites": ["day6_vector_embeddings"],
+          "tools_used": ["FAISS", "Pinecone", "ChromaDB"],
+          "difficulty": 3,
+          "related_topics": ["day9_rag_pipelines"]
+        }
+      ]
+    },
+    {
+      "day_number": 9,
+      "title": "Retrieval-Augmented Generation (RAG)",
+      "description": "Building naive and advanced RAG pipelines, query expansion, and reranking.",
+      "tools": ["LangChain", "LlamaIndex", "Cohere Rerank"],
+      "difficulty": 3,
+      "prerequisites": ["day8_vector_databases"],
+      "topics": [
+        {
+          "topic_id": "day9_rag_pipelines",
+          "name": "RAG Architecture & Retrieval Optimization",
+          "description": "Connecting vector search to generation, handling context window stuffing, hybrid search, and cross-encoder reranking.",
+          "learning_objectives": ["Build end-to-end RAG pipeline", "Implement hybrid lexical-semantic search", "Apply reranking models"],
+          "prerequisites": ["day8_vector_databases"],
+          "tools_used": ["LangChain", "Cohere Rerank"],
+          "difficulty": 3,
+          "related_topics": ["day21_rag_evaluation"]
+        }
+      ]
+    },
+    {
+      "day_number": 13,
+      "title": "AI Agent Architecture & LangGraph",
+      "description": "Building stateful, multi-step LLM agents using state graphs and deterministic flow control.",
+      "tools": ["LangGraph", "LangChain StateGraph"],
+      "difficulty": 4,
+      "prerequisites": ["day2_function_calling", "day9_rag_pipelines"],
+      "topics": [
+        {
+          "topic_id": "day13_agent_basics",
+          "name": "Stateful Agent Graphs & Routing",
+          "description": "Agent state models, node functions, conditional routing edges, and interrupt handling.",
+          "learning_objectives": ["Design LangGraph state schema", "Implement conditional routing based on state", "Manage agent memory"],
+          "prerequisites": ["day2_function_calling"],
+          "tools_used": ["LangGraph"],
+          "difficulty": 4,
+          "related_topics": ["day14_agent_memory"]
+        }
+      ]
+    },
+    {
+      "day_number": 14,
+      "title": "Agent Memory Systems & Context Compression",
+      "description": "Short-term vs long-term memory, sliding window summaries, and entity extraction.",
+      "tools": ["LangChain Memory", "SQLite Persistence", "Zep"],
+      "difficulty": 4,
+      "prerequisites": ["day13_agent_basics"],
+      "topics": [
+        {
+          "topic_id": "day14_agent_memory",
+          "name": "Agent Short-term & Summarized Memory",
+          "description": "Summarizing conversation history, maintaining key entities, and managing token budgets.",
+          "learning_objectives": ["Implement sliding memory window", "Compress context without losing critical facts"],
+          "prerequisites": ["day13_agent_basics"],
+          "tools_used": ["SQLite", "LangChain Memory"],
+          "difficulty": 4,
+          "related_topics": ["day26_production_guardrails"]
+        }
+      ]
+    },
+    {
+      "day_number": 21,
+      "title": "RAG Evaluation & LLM-as-a-Judge",
+      "description": "Evaluating retrieval quality and response correctness using automated LLM rubrics.",
+      "tools": ["RAGAS", "TruLens", "Promptfoo"],
+      "difficulty": 4,
+      "prerequisites": ["day9_rag_pipelines"],
+      "topics": [
+        {
+          "topic_id": "day21_rag_evaluation",
+          "name": "Retrieval & Generation Evaluation Metrics",
+          "description": "Faithfulness, answer relevance, context precision, context recall, and ground truth benchmarking.",
+          "learning_objectives": ["Explain RAGAS evaluation metrics", "Implement LLM-as-a-judge evaluators"],
+          "prerequisites": ["day9_rag_pipelines"],
+          "tools_used": ["RAGAS", "Promptfoo"],
+          "difficulty": 4,
+          "related_topics": ["day26_production_guardrails"]
+        }
+      ]
+    },
+    {
+      "day_number": 26,
+      "title": "Production Deployment & Guardrails",
+      "description": "Prompt injection defense, output filtering, latency optimization, and streaming.",
+      "tools": ["NeMo Guardrails", "Llama Guard", "FastAPI", "vLLM"],
+      "difficulty": 5,
+      "prerequisites": ["day13_agent_basics", "day21_rag_evaluation"],
+      "topics": [
+        {
+          "topic_id": "day26_production_guardrails",
+          "name": "Prompt Injection Defense & Security",
+          "description": "Detecting jailbreaks, delimiting untrusted user inputs, and preventing prompt extraction.",
+          "learning_objectives": ["Implement input sanitization rules", "Defend against prompt injection attacks"],
+          "prerequisites": ["day2_structured_outputs"],
+          "tools_used": ["FastAPI", "NeMo Guardrails"],
+          "difficulty": 5,
+          "related_topics": ["day21_rag_evaluation"]
+        }
+      ]
+    }
+  ]
+}
